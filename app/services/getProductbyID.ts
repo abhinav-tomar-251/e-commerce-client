@@ -1,7 +1,12 @@
+import baseUrl from "@/config";
+
 
 export const getProductDataByID = async (id: string) => {
+    const ProductIdPath =`/products/${id}`
+    const singleProductPath = baseUrl + ProductIdPath;
+    console.log(singleProductPath)
     try {
-        const response = await fetch(`http://localhost:7000/products/${id}`, {
+        const response = await fetch(singleProductPath, {
             cache: "no-cache",
         });
         

@@ -35,6 +35,7 @@ const ProductPage = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h3 className="font-extrabold text-4xl text-center">Our Products</h3>
       <div className="py-12 mx-40 grid grid-cols-3 gap-8">
         {data.map((product) => (
           <Link key={product.id} href={{ pathname: `/singleProduct`, query: { id: product.id } }}>

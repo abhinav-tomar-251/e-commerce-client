@@ -5,7 +5,7 @@ import Image from "next/image";
 import CheckboxOption from "../_components/checkBoxOptions";
 import { Button } from "@/components/ui/button";
 import { getProductDataByID } from "@/app/services/getProductbyID";
-
+import { addToCart } from "@/app/services/addToCart";
 interface Product {
     id: string;
     title: string;
@@ -17,11 +17,13 @@ interface Product {
     count: number;
 }
 
-const ProductDetail = () => {
+
+const ProductDetail =  () => {
 
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   
   const [product, setProduct] = useState<Product[]>([]);
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -58,6 +60,11 @@ const ProductDetail = () => {
         : [...prevSelectedColors, value]
     );
   };
+
+  const addProduct = () => {
+    
+  }
+
 
   return (
     <main>
@@ -113,7 +120,7 @@ const ProductDetail = () => {
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
             <div className='flex flex-row justify-start items-center gap-x-4'>
-              <Button className='flex w-full justify-center items-center px-2 text-white text-2xl py-6 bg-black rounded-full shadow-lg' onClick={()=> {}}>
+              <Button className='flex w-full justify-center items-center px-2 text-white text-2xl py-6 bg-black rounded-full shadow-lg' onClick={addProduct}>
                 Add to Cart 🛒
               </Button>
             </div>

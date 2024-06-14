@@ -1,7 +1,13 @@
+import baseUrl from "@/config";
 
+const path = "/products";
+
+const fullPath = baseUrl + path;
+
+console.log(fullPath)
 export const getProductData = async () => {
     try {
-        const products = await fetch("http://localhost:7000/products",{
+        const products = await fetch(fullPath,{
             cache: "no-cache",
         });
         
