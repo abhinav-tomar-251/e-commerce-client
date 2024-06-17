@@ -4,19 +4,32 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getProductData } from "../../services/getProducts";
+import mongoose from "mongoose";
 
 
 interface Product {
-    id: string;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    rating: number;
-    image: string;
-    count: number;
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  price: number;
+  category: string;
+  brand: string;
+  quantity: number;
+  sold?: number;
+  images: {
+    public_id: string;
+    url: string;
+  }[];
+  color?: string[];
+  tags?: string;
+  ratings?: {
+    star: number;
+    comment: string;
+    postedby: mongoose.Schema.Types.ObjectId;
+  }[];
+  totalrating?: number;
 }
-
 const ProductPage = () => {
   const [data, setData] = useState<Product[]>([]);
 
@@ -24,7 +37,7 @@ const ProductPage = () => {
     const fetchProducts = async () => {
       try {
         const products: Product[] = await getProductData();
-        console.log(products)
+        // console.log(products)
         setData(products)
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -38,9 +51,9 @@ const ProductPage = () => {
       <h3 className="font-extrabold text-4xl text-center">Our Products</h3>
       <div className="py-12 mx-40 grid grid-cols-3 gap-8">
         {data.map((product) => (
-          <Link key={product.id} href={{ pathname: `/singleProduct`, query: { id: product.id } }}>
+          <Link key={product._id} href={{ pathname: `/singleProduct`, query: { id: product._id } }}>
             <Card className="flex flex-col justify-center items-center">
-              <img src={product.image} className="h-[298px] object-contain" alt="product-image" />
+              <img src={product.images.length > 0 ? product.images[0].url : 'defaultImageURL'} className="h-[298px] object-contain" alt="product-image" />
               <CardHeader>{product.title}</CardHeader>
               <CardContent>${product.price}</CardContent>
             </Card>

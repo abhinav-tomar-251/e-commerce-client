@@ -5,18 +5,36 @@ import Image from "next/image";
 import CheckboxOption from "../_components/checkBoxOptions";
 import { Button } from "@/components/ui/button";
 import { getProductDataByID } from "@/app/services/getProductbyID";
-import { addToCart } from "@/app/services/addToCart";
-interface Product {
-    id: string;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    rating: number;
-    image: string;
-    count: number;
-}
+import mongoose from "mongoose";
+import AppHeader from "../_components/header";
+import NavBar from "../_components/navbar";
+import Footer from "../_components/footer";
+// import { addToCart } from "@/app/services/addToCart";interface Product {
 
+
+interface Product {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  price: number;
+  category: string;
+  brand: string;
+  quantity: number;
+  sold?: number;
+  images: {
+    public_id: string;
+    url: string;
+  }[];
+  color?: string[];
+  tags?: string;
+  ratings?: {
+    star: number;
+    comment: string;
+    postedby: mongoose.Schema.Types.ObjectId;
+  }[];
+  totalrating?: number;
+}
 
 const ProductDetail =  () => {
 
@@ -30,11 +48,11 @@ const ProductDetail =  () => {
   
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get('id');
-      console.log(id)
+      // console.log(id)
       if(id){
         try {
           const products: Product[] = await getProductDataByID(id);
-          console.log(products)
+          // console.log(products)
           setProduct(products)
         } catch (error) {
           console.error("Error fetching products:", error);
@@ -68,21 +86,22 @@ const ProductDetail =  () => {
 
   return (
     <main>
-     
+     <AppHeader/>
+     <NavBar/>
       <div className="relative flex mx-32 py-5 items-center">
         <div className="flex-grow border-t border-gray-400"></div>
       </div>
       {product.map((data) => (
-        <div key={data.id} className='grid grid-cols-2 justify-start items-start gap-4 p-8 h-2/4'>
+        <div key={data._id} className='grid grid-cols-2 justify-start items-start gap-4 p-8 h-2/4'>
           <div className="grid grid-flow-col-dense grid-cols-3 grid-rows-2 gap-3 space-x-4 cursor-pointer">
-            <img src={data.image} className='border border-slate-300 rounded-lg shadow-md p-2 object-contain' alt="Selected product Image" />
-            <img src={data.image} className='border border-slate-300 rounded-lg shadow-md p-2 object-contain' alt="Selected product Image" />
-            <img src={data.image} className='row-span-3 col-span-2 border border-slate-300 p-2 object-contain rounded-lg shadow-md' alt="Selected product Image" />
+            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'} className='border border-slate-300 rounded-lg shadow-md p-2 object-contain' alt="Selected product Image" />
+            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'}  className='border border-slate-300 rounded-lg shadow-md p-2 object-contain' alt="Selected product Image" />
+            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'}  className='row-span-3 col-span-2 border border-slate-300 p-2 object-contain rounded-lg shadow-md' alt="Selected product Image" />
           </div>
           <div className='grid justify-start gap-2 px-4'>
             <h3 className="font-extrabold text-4xl">{data.title}</h3>
             {/* <Image src="/assets/star-rating.png" alt="rating" width={150} height={30} /> */}
-            <p>{data.rating}</p>
+            <p>{data.totalrating || 3.5}</p>
             <p className='text-3xl font-semibold flex items-center gap-2'>${data.price} <span className='text-slate-300 line-through'>${data.price}</span> <span className='bg-red-300 p-1 rounded-full text-red-500 text-sm'>-40%</span></p>
             <p className="text-sm text-slate-400">{data.description}</p>
             <div className="relative flex py-5 items-center">
@@ -127,7 +146,7 @@ const ProductDetail =  () => {
           </div>
         </div>
       ))}
-    
+    <Footer/>
     </main>
   );
 };

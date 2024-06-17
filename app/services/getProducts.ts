@@ -1,10 +1,10 @@
 import baseUrl from "@/config";
 
-const path = "/products";
+const path = "/api/product";
 
 const fullPath = baseUrl + path;
 
-console.log(fullPath)
+// console.log(fullPath)
 export const getProductData = async () => {
     try {
         const products = await fetch(fullPath,{

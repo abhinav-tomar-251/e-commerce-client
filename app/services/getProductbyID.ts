@@ -2,9 +2,9 @@ import baseUrl from "@/config";
 
 
 export const getProductDataByID = async (id: string) => {
-    const ProductIdPath =`/products/${id}`
+    const ProductIdPath =`/api/product/${id}`
     const singleProductPath = baseUrl + ProductIdPath;
-    console.log(singleProductPath)
+    // console.log(singleProductPath)
     try {
         const response = await fetch(singleProductPath, {
             cache: "no-cache",

@@ -3,16 +3,12 @@ const nextConfig = {
     async rewrites() {
         return [
             {
-                source: "/products",
-                destination: "http://localhost:7000/products",
+                source: "/api/product",
+                destination: "http://localhost:7000/api/product",
             },
             {
-                source: "/products/:productId",
-                destination: "http://localhost:7000/proucts/:productId",
-            },
-            {
-                source: "/cart",
-                destination: "http://localhost:7000/cart",
+                source: "/api/product/:id",
+                destination: "http://localhost:7000/api/product/:id",
             },
         ];
     }
