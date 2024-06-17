@@ -1,3 +1,4 @@
+import axios from 'axios'
 import baseUrl from "@/config";
 
 
@@ -6,15 +7,17 @@ export const getProductDataByID = async (id: string) => {
     const singleProductPath = baseUrl + ProductIdPath;
     // console.log(singleProductPath)
     try {
-        const response = await fetch(singleProductPath, {
-            cache: "no-cache",
+        const response = await axios.get(singleProductPath, {
+            headers: {
+                'Cache-Control': 'no-cache',
+            },
         });
         
-        if (!response.ok) {
+        if (!response) {
             throw new Error("Failed to fetch product");
         }
 
-        const data = await response.json();
+        const data = await response.data;
         return [data]; 
     } catch (error) {
         console.log(error);

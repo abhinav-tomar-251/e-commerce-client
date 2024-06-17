@@ -1,19 +1,21 @@
-import baseUrl from "@/config";
+import axios from 'axios'
+import baseUrl from '@/config';
 
-const path = "/api/product";
+const path = '/api/product';
 
 const fullPath = baseUrl + path;
 
-// console.log(fullPath)
 export const getProductData = async () => {
     try {
-        const products = await fetch(fullPath,{
-            cache: "no-cache",
+        const response = await axios.get(fullPath, {
+            headers: {
+                'Cache-Control': 'no-cache',
+            },
         });
-        
-        const data = await products.json();
-        return data
+        //  console.log(response)
+        return response.data;
     } catch (error) {
-        console.log(error)
+        console.error('Error fetching product data:', error);
+        throw error; 
     }
-}
+};
