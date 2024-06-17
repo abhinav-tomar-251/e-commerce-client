@@ -9,6 +9,8 @@ import mongoose from "mongoose";
 import AppHeader from "../_components/header";
 import NavBar from "../_components/navbar";
 import Footer from "../_components/footer";
+import { useAppDispatch } from "@/lib/hooks";
+import { addItem } from "@/lib/store/features/cart/cartSlice";
 // import { addToCart } from "@/app/services/addToCart";interface Product {
 
 
@@ -79,8 +81,11 @@ const ProductDetail =  () => {
     );
   };
 
-  const addProduct = () => {
-    
+  const dispatch  = useAppDispatch();
+  
+  const addProduct = (_id: string) => {
+    console.log("Item added in cart", _id);
+    dispatch(addItem(_id));
   }
 
 
@@ -94,9 +99,9 @@ const ProductDetail =  () => {
       {product.map((data) => (
         <div key={data._id} className='grid grid-cols-2 justify-start items-start gap-4 p-8 h-2/4'>
           <div className="grid grid-flow-col-dense grid-cols-3 grid-rows-2 gap-3 space-x-4 cursor-pointer">
-            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'} className='border border-slate-300 rounded-lg shadow-md p-2 object-contain' alt="Selected product Image" />
-            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'}  className='border border-slate-300 rounded-lg shadow-md p-2 object-contain' alt="Selected product Image" />
-            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'}  className='row-span-3 col-span-2 border border-slate-300 p-2 object-contain rounded-lg shadow-md' alt="Selected product Image" />
+            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'} className='border border-slate-300 rounded-lg shadow-md   p-2 object-contain' alt="Selected product Image" />
+            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'}  className='border border-slate-300 rounded-lg shadow-md   p-2 object-contain' alt="Selected product Image" />
+            <img src={data.images.length > 0 ? data.images[0].url : 'defaultImageURL'}  className='row-span-3 col-span-2 border border-slate-300   p-2 object-contain rounded-lg shadow-md' alt="Selected product Image" />
           </div>
           <div className='grid justify-start gap-2 px-4'>
             <h3 className="font-extrabold text-4xl">{data.title}</h3>
@@ -139,7 +144,7 @@ const ProductDetail =  () => {
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
             <div className='flex flex-row justify-start items-center gap-x-4'>
-              <Button className='flex w-full justify-center items-center px-2 text-white text-2xl py-6 bg-black rounded-full shadow-lg' onClick={addProduct}>
+              <Button className='flex w-full justify-center items-center px-2 text-white text-2xl py-6 bg-black rounded-full shadow-lg' onClick={()=> {addProduct(data._id)}}>
                 Add to Cart 🛒
               </Button>
             </div>

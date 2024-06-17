@@ -4,9 +4,9 @@ import React from 'react'
 // import DropdownButton from './dropdownButton'
 import Link from 'next/link'
 import { Input } from '@/components/ui/input'
-import { FaShoppingCart } from 'react-icons/fa'
 // import { useCart } from "../../../context/cartContext"; 
 // import { UserButton } from 'libs/ui-components/src/components/auth/userButton'
+import CartButton from './cartButton'
 
 const NavBar = () => {
   // const { cartCount } = useCart();
@@ -21,18 +21,7 @@ const NavBar = () => {
       </div>
       <div className='flex items-center gap-4 mt-4 md:mt-0'>
         <span className='w-full md:w-[200px] lg:w-[300px]'><Input id='search' type='search' placeholder='...Search Here' className='rounded-full bg-slate-200 w-full' /></span>
-        <div className="relative">
-          <Link href="/Cart" className='text-lg md:text-2xl cursor-pointer'>
-            <span className="relative inline-block">
-              <FaShoppingCart />
-              {/* {cartCount > 0 && ( */}
-                <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1 absolute -top-2 -right-3">
-                  {/* {cartCount} */}  0
-                </span>
-              {/* )} */}
-            </span>
-          </Link>
-        </div>
+        <CartButton/>
         {/* <UserButton /> */}
       </div>
     </nav>

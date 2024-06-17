@@ -52,9 +52,9 @@ const ProductPage = () => {
       <div className="py-12 mx-40 grid grid-cols-3 gap-8">
         {data.map((product) => (
           <Link key={product._id} href={{ pathname: `/singleProduct`, query: { id: product._id } }}>
-            <Card className="flex flex-col justify-center items-center">
-              <img src={product.images.length > 0 ? product.images[0].url : 'defaultImageURL'} className="h-[298px] object-contain" alt="product-image" />
-              <CardHeader>{product.title}</CardHeader>
+            <Card className="flex flex-col justify-center  p-2">
+              <img src={product.images.length > 0 ? product.images[0].url : 'defaultImageURL'} className="h-[100px] object-contain" alt="product-image" />
+              <CardHeader className=" text-nowrap overflow-hidden hover:overflow-visible hover:text-wrap">{product.title}</CardHeader>
               <CardContent>${product.price}</CardContent>
             </Card>
           </Link>

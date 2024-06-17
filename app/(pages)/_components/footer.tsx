@@ -41,18 +41,18 @@ const Footer = () => {
           <FaArrowUp />
         </button>
       )}
-        <div className="bg-black absolute -mt-14 mx-48 px-12 py-6 rounded-lg shadow-md flex gap-x-24 ">
-           <p className="font-extrabold text-white text-3xl w-2/3  text-left ">STAY UPTO DATE ABOUT OUR LATEST OFFERS</p>
-           <div className="flex flex-col w-1/3 gap-2 ">
+        <div className="bg-black absolute -mt-14 lg:mx-48 mx-0 md:mx-48 lg:px-12 md:px-6 py-6 rounded-lg shadow-md flex lg:flex-row md:flex-col flex-col gap-x-24 ">
+           <p className="font-extrabold text-white text-3xl lg:w-2/3 md:w-full w-full  text-left ">STAY UPTO DATE ABOUT OUR LATEST OFFERS</p>
+           <div className="flex lg:flex-col md:flex-row flex-row lg:w-1/3 md:w-full w-full md:py-2 py-2 gap-2 ">
               <Input className="bg-white rounded-full shadow-md" type="email" placeholder="Enter your email address"/>
                <Button className="bg-white text-black rounded-full shadow-md px-8 items-center hover:bg-white" >
                   Subscribe to newsletter
                </Button>
            </div>
         </div>
-        <div className="flex flex-row gap-x-16 justify-between items-start px-48 pt-16">
+        <div className="flex lg:flex-row flex-col md:flex-row lg:gap-x-16 md:gap-x-8 justify-between items-start px-48 lg:pt-16 md:pt-32">
               <div className="flex flex-col gap-y-8 py-16 w-1/4">
-                <h2 className="text-3xl font-extrabold ">🛒e-commerce</h2>
+                <h2 className="lg:text-3xl md:text-xl font-extrabold ">🛒e-commerce</h2>
                 <p className="font-normal text-slate-500 ">We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
                 <div className="flex flex-row gap-x-4 ">
                     <FaTwitter className="bg-white text-black p-2 rounded-full w-12 h-12"/>
@@ -62,7 +62,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-y-8 py-16 w-1/4">
-                <h2 className="text-2xl font-semiabold ">COMPANY</h2>
+                <h2 className="lg:text-2xl md:text-lg font-semiabold ">COMPANY</h2>
                 <div className=" flex-col">
                    <p className="text-slate-500 fornt-normal ">About</p>
                    <p className="text-slate-500 fornt-normal ">Features</p>
