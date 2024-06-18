@@ -10,11 +10,14 @@ import AppHeader from "../_components/header";
 import NavBar from "../_components/navbar";
 import Footer from "../_components/footer";
 import { useAppDispatch } from "@/lib/hooks";
-import { addItem } from "@/lib/store/features/cart/cartSlice";
+import { addToCart } from "@/lib/store/features/cart/cartSlice";
+import { AppDispatch } from "@/lib/store/store";
+import { useDispatch } from "react-redux";
 
 
 const ProductDetail =  () => {
-
+  const dispatch: AppDispatch = useDispatch()
+  
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   
   const [product, setProduct] = useState<Product[]>([]);
@@ -42,6 +45,14 @@ const ProductDetail =  () => {
     }
   }, []);
 
+  const addProduct = (_id: string) => {
+    console.log("Item added in cart");
+    const productItem = product.find(p => p._id === _id);
+    if (productItem) {
+      dispatch(addToCart({ _id: productItem._id, quantity: 1 }));
+    }
+  }
+
   if (!product) {
     return <div className='flex justify-center items-center h-screen'>Loading...</div>;
   }
@@ -56,12 +67,7 @@ const ProductDetail =  () => {
     );
   };
 
-  const dispatch  = useAppDispatch();
-  
-  const addProduct = (_id: string) => {
-    console.log("Item added in cart");
-    dispatch(addItem(product));
-  }
+ 
 
 
   return (

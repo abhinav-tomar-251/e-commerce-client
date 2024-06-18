@@ -8,7 +8,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 
 const CartButton = () => {
 
-    const items = useAppSelector((state: RootState )=> state.cartSlice.items);
+    const items = useAppSelector((state: RootState )=> state.cart.items);
 
   return (
     <div className="relative">
@@ -19,7 +19,7 @@ const CartButton = () => {
                 <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1 absolute -top-2 -right-3">
                   {items.length}  
                 </span>
-               )} 
+              )} 
             </span>
           </Link>
     </div>

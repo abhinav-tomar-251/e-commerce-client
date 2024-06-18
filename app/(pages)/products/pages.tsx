@@ -2,18 +2,18 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import  {getProductData}  from "../../services/getProducts";
 import mongoose from "mongoose";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { Button } from "@/components/ui/button";
-import { addItem } from "@/lib/store/features/cart/cartSlice";
+// import { addItem } from "@/lib/store/features/cart/cartSlice";
 import { updatedProducts } from "@/lib/store/features/products/productSlice";
 import { RootState } from "@/lib/store/store";
 
 const ProductPage = () => {
   const dispatch  = useAppDispatch();
-  const product = useAppSelector((state : RootState) => state.productSlice.products);
+  const product = useAppSelector((state : RootState) => state.product.products);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,7 +26,7 @@ const ProductPage = () => {
       }
     };
     fetchProducts();
-  }, []);
+  },[]);
 
 
   
