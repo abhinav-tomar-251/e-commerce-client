@@ -1,26 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export interface CartState {
-  items: string[];
+  items: Product[];
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
 }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action) => {
-        state.items.push(action.payload)
+    addItem: (state, action: PayloadAction<Product[]>) => {
+        state.items.push(action.payload);
     },
-    
-  },
+    showCart: (state, action: PayloadAction<Product[]>) => {
+      state.items = action.payload;
+   }
+  }
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem } = cartSlice.actions
+export const { addItem, showCart } = cartSlice.actions
 
 export default cartSlice.reducer

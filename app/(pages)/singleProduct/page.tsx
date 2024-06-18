@@ -11,32 +11,7 @@ import NavBar from "../_components/navbar";
 import Footer from "../_components/footer";
 import { useAppDispatch } from "@/lib/hooks";
 import { addItem } from "@/lib/store/features/cart/cartSlice";
-// import { addToCart } from "@/app/services/addToCart";interface Product {
 
-
-interface Product {
-  _id: string;
-  title: string;
-  slug: string;
-  description: string;
-  price: number;
-  category: string;
-  brand: string;
-  quantity: number;
-  sold?: number;
-  images: {
-    public_id: string;
-    url: string;
-  }[];
-  color?: string[];
-  tags?: string;
-  ratings?: {
-    star: number;
-    comment: string;
-    postedby: mongoose.Schema.Types.ObjectId;
-  }[];
-  totalrating?: number;
-}
 
 const ProductDetail =  () => {
 
@@ -84,8 +59,8 @@ const ProductDetail =  () => {
   const dispatch  = useAppDispatch();
   
   const addProduct = (_id: string) => {
-    console.log("Item added in cart", _id);
-    dispatch(addItem(_id));
+    console.log("Item added in cart");
+    dispatch(addItem(product));
   }
 
 

@@ -1,13 +1,14 @@
 'use client'
 
 import { useAppSelector } from '@/lib/hooks'
+import { RootState } from '@/lib/store/store'
 import Link from 'next/link'
 import React from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 
 const CartButton = () => {
 
-    const items = useAppSelector((state)=> state.cart.items);
+    const items = useAppSelector((state: RootState )=> state.cartSlice.items);
 
   return (
     <div className="relative">
